@@ -77,15 +77,20 @@ body {
 .logo {
   text-decoration: none;
   color: var(--primary-color);
+  display: flex;
+  align-items: center;
 }
 
 .logo h1 {
   font-size: 1.5rem;
   font-weight: 700;
+  margin: 0;
+  line-height: 1;
 }
 
 .nav-links {
   display: flex;
+  align-items: center;
   gap: 2rem;
 }
 
@@ -94,6 +99,8 @@ body {
   color: var(--text-dark);
   font-weight: 500;
   transition: color 0.2s;
+  display: flex;
+  align-items: center;
 }
 
 .nav-links a:hover {
