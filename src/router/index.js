@@ -18,6 +18,11 @@ const routes = [
     path: '/admin',
     name: 'AdminPage',
     component: AdminPage
+  },
+  {
+    path: '/admin/edit/:id',
+    name: 'AdminEditPage',
+    component: AdminPage
   }
 ]
 

@@ -1,10 +1,12 @@
 <template>
   <div class="admin-page">
-    <h1>Blog Admin</h1>
-    <p class="subtitle">Create and manage blog posts</p>
+    <h1>{{ isEditMode ? 'Edit Blog' : 'Blog Admin' }}</h1>
+    <p class="subtitle">{{ isEditMode ? 'Update your blog post' : 'Create and manage blog posts' }}</p>
     
-    <div class="admin-container">
-      <BlogEditor @save="handleSave" :saving="saving" />
+    <div v-if="loading" class="loading">Loading blog...</div>
+    
+    <div v-else class="admin-container">
+      <BlogEditor @save="handleSave" :saving="saving" :initialData="blogData" />
     </div>
     
     <div v-if="saveMessage" class="message" :class="{ error: saveError }">
@@ -14,15 +16,40 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, onMounted, computed } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import { supabase } from '../lib/supabase'
 import BlogEditor from '../components/BlogEditor.vue'
 
 const router = useRouter()
+const route = useRoute()
 const saving = ref(false)
+const loading = ref(false)
 const saveMessage = ref('')
 const saveError = ref(false)
+const blogData = ref(null)
+
+const isEditMode = computed(() => !!route.params.id)
+
+const fetchBlog = async () => {
+  try {
+    loading.value = true
+    const { data, error } = await supabase
+      .from('blogs')
+      .select('*')
+      .eq('id', route.params.id)
+      .single()
+    
+    if (error) throw error
+    blogData.value = data
+  } catch (err) {
+    saveError.value = true
+    saveMessage.value = `Error loading blog: ${err.message}`
+    console.error('Error fetching blog:', err)
+  } finally {
+    loading.value = false
+  }
+}
 
 const handleSave = async (blogData) => {
   try {
@@ -30,14 +57,33 @@ const handleSave = async (blogData) => {
     saveMessage.value = ''
     saveError.value = false
     
-    const { data, error } = await supabase
-      .from('blogs')
-      .insert([blogData])
-      .select()
+    let data, error
+    
+    if (isEditMode.value) {
+      // Update existing blog
+      const result = await supabase
+        .from('blogs')
+        .update(blogData)
+        .eq('id', route.params.id)
+        .select()
+      
+      data = result.data
+      error = result.error
+      saveMessage.value = 'Blog updated successfully!'
+    } else {
+      // Create new blog
+      const result = await supabase
+        .from('blogs')
+        .insert([blogData])
+        .select()
+      
+      data = result.data
+      error = result.error
+      saveMessage.value = 'Blog saved successfully!'
+    }
     
     if (error) throw error
     
-    saveMessage.value = 'Blog saved successfully!'
     setTimeout(() => {
       router.push(`/blog/${data[0].id}`)
     }, 1500)
@@ -49,6 +95,12 @@ const handleSave = async (blogData) => {
     saving.value = false
   }
 }
+
+onMounted(() => {
+  if (isEditMode.value) {
+    fetchBlog()
+  }
+})
 </script>
 
 <style scoped>
@@ -67,6 +119,13 @@ h1 {
   font-size: 1.125rem;
   color: var(--text-light);
   margin-bottom: 2rem;
+}
+
+.loading {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.125rem;
+  color: var(--text-light);
 }
 
 .admin-container {

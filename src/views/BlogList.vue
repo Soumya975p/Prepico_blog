@@ -12,13 +12,18 @@
     </div>
     
     <div v-else class="blogs-grid">
-      <div v-for="blog in blogs" :key="blog.id" class="blog-card" @click="goToBlog(blog.id)">
-        <div v-if="blog.thumbnail_url" class="blog-thumbnail">
+      <div v-for="blog in blogs" :key="blog.id" class="blog-card">
+        <div v-if="blog.thumbnail_url" class="blog-thumbnail" @click="goToBlog(blog.id)">
           <img :src="blog.thumbnail_url" :alt="blog.title" />
         </div>
         <div class="blog-content">
-          <h2>{{ blog.title }}</h2>
-          <p class="blog-date">{{ formatDate(blog.created_at) }}</p>
+          <div @click="goToBlog(blog.id)" style="cursor: pointer;">
+            <h2>{{ blog.title }}</h2>
+            <p class="blog-date">{{ formatDate(blog.created_at) }}</p>
+          </div>
+          <div class="blog-actions">
+            <button @click.stop="editBlog(blog.id)" class="edit-btn">Edit</button>
+          </div>
         </div>
       </div>
     </div>
@@ -55,6 +60,10 @@ const fetchBlogs = async () => {
 
 const goToBlog = (id) => {
   router.push(`/blog/${id}`)
+}
+
+const editBlog = (id) => {
+  router.push(`/admin/edit/${id}`)
 }
 
 const formatDate = (date) => {
@@ -150,5 +159,26 @@ h1 {
 .blog-date {
   color: var(--text-light);
   font-size: 0.875rem;
+}
+
+.blog-actions {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.edit-btn {
+  padding: 0.5rem 1rem;
+  background: var(--primary-color);
+  color: var(--white);
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.edit-btn:hover {
+  background: var(--secondary-color);
 }
 </style>

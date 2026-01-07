@@ -19,19 +19,21 @@
       </div>
     </article>
     
-    <div class="back-link">
-      <router-link to="/">← Back to all blogs</router-link>
+    <div class="action-links">
+      <router-link to="/" class="back-link">← Back to all blogs</router-link>
+      <button @click="editBlog" class="edit-btn">Edit Blog</button>
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { supabase } from '../lib/supabase'
 import BlogContentRenderer from '../components/BlogContentRenderer.vue'
 
 const route = useRoute()
+const router = useRouter()
 const blog = ref(null)
 const loading = ref(true)
 const error = ref(null)
@@ -53,6 +55,10 @@ const fetchBlog = async () => {
   } finally {
     loading.value = false
   }
+}
+
+const editBlog = () => {
+  router.push(`/admin/edit/${route.params.id}`)
 }
 
 const formatDate = (date) => {
@@ -125,18 +131,37 @@ onMounted(() => {
   color: var(--text-dark);
 }
 
-.back-link {
-  text-align: center;
+.action-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 1rem;
+  gap: 1rem;
 }
 
-.back-link a {
+.back-link {
   color: var(--primary-color);
   text-decoration: none;
   font-weight: 500;
 }
 
-.back-link a:hover {
+.back-link:hover {
   text-decoration: underline;
+}
+
+.edit-btn {
+  padding: 0.75rem 1.5rem;
+  background: var(--primary-color);
+  color: var(--white);
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.edit-btn:hover {
+  background: var(--secondary-color);
 }
 </style>

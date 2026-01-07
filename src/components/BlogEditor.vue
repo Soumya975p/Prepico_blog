@@ -47,11 +47,12 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import ContentBlock from './ContentBlock.vue'
 
 const props = defineProps({
-  saving: Boolean
+  saving: Boolean,
+  initialData: Object
 })
 
 const emit = defineEmits(['save'])
@@ -60,6 +61,25 @@ const title = ref('')
 const thumbnailUrl = ref('')
 const contentBlocks = ref([])
 let blockIdCounter = 0
+
+const loadInitialData = () => {
+  if (props.initialData) {
+    title.value = props.initialData.title || ''
+    thumbnailUrl.value = props.initialData.thumbnail_url || ''
+    contentBlocks.value = props.initialData.content || []
+    blockIdCounter = contentBlocks.value.length
+  }
+}
+
+watch(() => props.initialData, (newData) => {
+  if (newData) {
+    loadInitialData()
+  }
+}, { immediate: true })
+
+onMounted(() => {
+  loadInitialData()
+})
 
 const addBlock = (type) => {
   const newBlock = {
