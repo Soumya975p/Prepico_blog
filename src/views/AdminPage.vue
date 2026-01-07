@@ -148,4 +148,38 @@ h1 {
   background: #FEE2E2;
   color: #991B1B;
 }
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .admin-container {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.75rem;
+  }
+
+  .subtitle {
+    font-size: 0.9375rem;
+  }
+
+  .admin-container {
+    padding: 1rem;
+  }
+
+  .message {
+    font-size: 0.875rem;
+    padding: 0.75rem;
+  }
+}
 </style>

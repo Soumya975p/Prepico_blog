@@ -114,4 +114,64 @@ const getBlockComponent = (type) => {
 .horizontal-item {
   padding: 1rem;
 }
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .paragraph {
+    font-size: 1rem;
+  }
+
+  .heading {
+    font-size: 1.5rem;
+    margin: 1.5rem 0 0.75rem 0;
+  }
+
+  .list {
+    padding-left: 1.5rem;
+  }
+
+  .list li {
+    font-size: 1rem;
+  }
+
+  .horizontal-layout {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .horizontal-item {
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .paragraph {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+  }
+
+  .heading {
+    font-size: 1.25rem;
+  }
+
+  .list {
+    padding-left: 1.25rem;
+  }
+
+  .list li {
+    font-size: 0.9375rem;
+  }
+
+  .media-image,
+  .media-video {
+    margin: 1rem 0;
+    border-radius: 0.375rem;
+  }
+
+  .horizontal-layout {
+    padding: 0.75rem;
+    margin: 1rem 0;
+  }
+}
 </style>

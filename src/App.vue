@@ -3,9 +3,7 @@
     <nav class="navbar">
       <div class="container">
         <router-link to="/" class="logo">
-          <svg width="120" height="32" viewBox="0 0 200 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <text x="50" y="35" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#4F46E5">PREPICO</text>
-          </svg>
+          <img src="/logo.jpg" alt="PREPICO" />
         </router-link>
         <div class="nav-links">
           <router-link to="/">All Blogs</router-link>
@@ -29,12 +27,12 @@
 
 <style>
 :root {
-  --primary-color: #4F46E5;
+  --primary-color: #012987;
   --secondary-color: #7C3AED;
   --text-dark: #1F2937;
   --text-light: #6B7280;
   --bg-light: #F9FAFB;
-  --border-color: #E5E7EB;
+  --border-color: #FDFDFF;
   --white: #FFFFFF;
 }
 
@@ -45,10 +43,12 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Poppins', 'Segoe UI', system-ui, -apple-system, sans-serif;
   color: var(--text-dark);
   background-color: var(--bg-light);
-  line-height: 1.6;
+  line-height: 1.5;
+  font-weight: 400;
+  font-size: 16px;
 }
 
 #app {
@@ -59,21 +59,21 @@ body {
 
 .navbar {
   background: var(--white);
-  border-bottom: 1px solid var(--border-color);
-  padding: 1rem 0;
+  border-bottom: 1px solid #E5E7EB;
+  padding: 0.75rem 0;
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .navbar .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1200px;
+  max-width: 1750px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0.5rem 3rem;
 }
 
 .logo {
@@ -83,8 +83,8 @@ body {
   align-items: center;
 }
 
-.logo svg {
-  height: 32px;
+.logo img {
+  height: 45px;
   width: auto;
   display: block;
 }
@@ -92,13 +92,14 @@ body {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 2.5rem;
 }
 
 .nav-links a {
   text-decoration: none;
-  color: var(--text-dark);
+  color: #012987;
   font-weight: 500;
+  font-size: 1rem;
   transition: color 0.2s;
   display: flex;
   align-items: center;
@@ -113,14 +114,17 @@ body {
 }
 
 .admin-link {
-  padding: 0.5rem 1rem;
-  background: var(--primary-color);
+  padding: 0.625rem 1.5rem;
+  background: #012987;
   color: var(--white) !important;
-  border-radius: 0.375rem;
+  border-radius: 2rem;
+  font-weight: 600;
 }
 
 .admin-link:hover {
-  background: var(--secondary-color);
+  background: #001a5c;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(1, 41, 135, 0.3);
 }
 
 main {
@@ -147,6 +151,65 @@ main {
 .footer p {
   text-align: center;
   color: var(--text-light);
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .navbar .container {
+    padding: 0 1rem;
+  }
+
+  .logo img {
+    height: 28px;
+  }
+
+  .nav-links {
+    gap: 1rem;
+  }
+
+  .nav-links a {
+    font-size: 0.875rem;
+  }
+
+  .admin-link {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  main {
+    padding: 1rem;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+
+  .footer {
+    padding: 1.5rem 0;
+  }
+
+  .footer p {
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar .container {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .logo img {
+    height: 24px;
+  }
+
+  .nav-links {
+    gap: 0.75rem;
+  }
+
+  main {
+    padding: 0.75rem;
+  }
 }
 
 button {

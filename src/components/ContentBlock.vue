@@ -256,4 +256,55 @@ watch(() => props.block, (newBlock) => {
   border: 1px solid var(--border-color);
   font-size: 0.75rem;
 }
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .horizontal-children {
+    grid-template-columns: 1fr;
+  }
+
+  .add-child-buttons {
+    flex-direction: column;
+  }
+
+  .add-child-buttons button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .content-block {
+    padding: 0.75rem;
+  }
+
+  .block-header {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .block-type {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .control-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 0.875rem;
+  }
+
+  .block-content textarea,
+  .block-content input {
+    font-size: 0.9375rem;
+  }
+
+  .list-item {
+    gap: 0.5rem;
+  }
+
+  .add-item-btn {
+    font-size: 0.875rem;
+    padding: 0.5rem;
+  }
+}
 </style>

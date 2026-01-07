@@ -188,4 +188,37 @@ label {
   padding: 0.75rem 2rem;
   font-size: 1.125rem;
 }
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .add-block-buttons {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+
+  .add-block-buttons button {
+    padding: 0.625rem 0.75rem;
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-group label {
+    font-size: 0.9375rem;
+  }
+
+  .form-group input {
+    font-size: 0.9375rem;
+  }
+
+  .add-block-buttons {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .save-btn {
+    width: 100%;
+    padding: 0.875rem;
+  }
+}
 </style>
