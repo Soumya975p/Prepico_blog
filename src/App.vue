@@ -3,7 +3,7 @@
     <nav class="navbar">
       <div class="container">
         <router-link to="/" class="logo">
-          <h1>PREPICO BLOG</h1>
+          <img src="https://www.prepico.ai/assets/brand_logo_footer-BDZMs5gH.png" alt="Prepico" class="logo-img" />
         </router-link>
         <div class="nav-links">
           <router-link to="/">All Blogs</router-link>
@@ -81,11 +81,10 @@ body {
   align-items: center;
 }
 
-.logo h1 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin: 0;
-  line-height: 1;
+.logo-img {
+  height: 32px;
+  width: auto;
+  display: block;
 }
 
 .nav-links {
